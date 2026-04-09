@@ -59,7 +59,7 @@ async def update_trips(admin_id:int,data:TripCreate,trip_id:int,db:AsyncSession 
     trip = await TripService.update_trip(db,trip_id,data)
     if not trip:
         raise HTTPException(status_code=404, detail="Trip not found")
-    return {"message":"Trip Update","Trip":trip} # кстати я на паре 09.04.2026 фулл пару играл в Bite By Night :3
+    return {"message":"Trip Update","Trip":trip}
 
 @admin_router.delete("/trips/{trip_id}") # <-- удаление трипа
 async def delete_trips(admin_id:int,trip_id:int,db:AsyncSession = Depends(get_db)):
