@@ -49,3 +49,16 @@ class BookingService:
         await db.commit()
         await db.refresh(booking)
         return booking
+    @staticmethod
+    async def adm_update_booking(db:AsyncSession,booking_id:int,data:dict):
+        result = await db.execute(select(Booking).where(Booking.id==booking_id))
+        book = result.scalar_one_or_none()
+        if not book:  # <-- если нету то нилл
+            return None
+        if data.user_id is not None:  # <-- проверка заполнен ли
+            book.user_id = data.user_id
+        if data.trip_id is not None:  # <-- проверка заполнен ли
+            book.trip_id = data.trip_id
+        await db.commit()
+        await db.refresh(book)
+        return book

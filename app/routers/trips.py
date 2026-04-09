@@ -7,9 +7,9 @@ from database import get_db
 
 trips_router = APIRouter(prefix="/trips", tags=["trips"])
 
-@trips_router.post("/")
-async def create_trip(from_city:str,to_city:str,price:float,db:AsyncSession=Depends(get_db)):
-    return await TripService.create_trip(db,from_city,to_city,price)
+# @trips_router.post("/")
+# async def create_trip(from_city:str,to_city:str,price:float,db:AsyncSession=Depends(get_db)):
+#     return await TripService.create_trip(db,from_city,to_city,price)
 
 @trips_router.get("/")
 async def get_trips(from_city:str|None=None,to_city:str|None=None,db:AsyncSession=Depends(get_db)):
