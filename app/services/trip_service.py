@@ -6,13 +6,13 @@ from app.models.models import Trip
 
 class TripService:
     @staticmethod
-    async def create_trip(db:AsyncSession,data):
+    async def create_trip(db:AsyncSession,data): # <-- создание билета
         trip = Trip(**data.dict())
         db.add(trip)
         await db.commit()
         return trip
     @staticmethod
-    async def get_trip(db: AsyncSession,from_city:str|None=None,to_city:str|None=None):
+    async def get_trip(db: AsyncSession,from_city:str|None=None,to_city:str|None=None): # <-- получение билета по городам
         result_f = select(Trip)
         if from_city:
             result_f = result_f.where(Trip.from_city == from_city)
@@ -21,7 +21,7 @@ class TripService:
         results = await db.execute(result_f)
         return results.scalars().all()
     @staticmethod
-    async def get_by_id(db:AsyncSession,trip_id:int):
+    async def get_by_id(db:AsyncSession,trip_id:int): # <-- получение билета по id
         result = await  db.execute(select(Trip).where(Trip.id == trip_id))
         return result.scalar_one_or_none()
     @staticmethod
@@ -41,7 +41,7 @@ class TripService:
         return trip
 
     @staticmethod
-    async def delete_trip(db:AsyncSession, trip_id:int):
+    async def delete_trip(db:AsyncSession, trip_id:int): # <-- удаление билета
         result = await db.execute(select(Trip).where(Trip.id == trip_id))
         trip = result.scalar_one_or_none()
         if not trip:

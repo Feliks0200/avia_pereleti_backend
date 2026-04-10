@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 
-from app.models.models import Base
-from app.routers.admin import admin_router
-from app.routers.auth import router
-from app.routers.bookings import book_router
-from app.routers.trips import trips_router
-from app.routers.users import user_router
+from app.models.models import Base # <-- база данных
+from app.routers.admin import admin_router # <-- админ роутер
+from app.routers.auth import router # <-- роутер для аутинификации
+from app.routers.bookings import book_router # <-- бронирование роутер
+from app.routers.trips import trips_router # <-- билеты роутер
+from app.routers.users import user_router # <-- пользователи роутер
 from database import engine
 
 app = FastAPI()
